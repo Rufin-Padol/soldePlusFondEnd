@@ -1,0 +1,4 @@
+.opacite-basse {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}

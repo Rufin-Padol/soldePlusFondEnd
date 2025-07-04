@@ -1,0 +1,84 @@
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+  <!-- En-tête -->
+ <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-5 text-white">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center">
+      <!-- Bouton Retour -->
+      <button (click)="goBack()" class="mr-4 text-white hover:text-gray-200 transition">
+        <i class="fas fa-arrow-left text-xl"></i>
+      </button>
+      
+      <!-- Titre -->
+      <h1 class="text-2xl font-bold flex items-center">
+        <i class="fas fa-bell mr-3"></i>
+        Mes Notifications
+      </h1>
+    </div>
+    
+    <!-- Bouton "Tout marquer comme lu" (optionnel) -->
+    <!-- <button (click)="markAllAsRead()" class="text-sm bg-white bg-opacity-20 px-3 py-1 rounded-full hover:bg-opacity-30">
+      Tout marquer comme lu
+    </button> -->
+  </div>
+</div>
+
+
+ <!-- Message de succès temporaire -->
+  <div *ngIf="showSuccessMessage" 
+       class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 animate-fade-out"
+       [@fadeInOut]>
+    <div class="flex items-center">
+      <i class="fas fa-check-circle mr-2"></i>
+      <p>{{eponseMessage}}</p>
+    </div>
+  </div>
+
+  <!-- Liste des notifications -->
+  <div class="divide-y divide-gray-200">
+    <div *ngFor="let notif of notification" class="p-4 hover:bg-gray-50 transition">
+      <div class="flex items-start">
+        <!-- Avatar utilisateur -->
+        <img [src]="notif.senderAvatar || 'assets/default-avatar.png'" 
+             class="w-10 h-10 rounded-full mr-3 border-2 border-blue-200">
+        
+        <div class="flex-1">
+          <!-- En-tête notification -->
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="font-bold">{{notif.senderName}}</span>
+              <span class="text-gray-500 text-sm ml-2">{{notif.senderUsername}}</span>
+            </div>
+            <span class="text-xs text-gray-400">{{formatDate(notif.date || '')}}</span>
+          </div>
+          
+          <!-- Message -->
+          <p class="mt-1 text-gray-700">{{notif.message}}</p>
+          
+          <!-- Actions - Afficher seulement pour les demandes de parrainage -->
+          <div *ngIf="!notif.read && notif.type === 'friend-request'" class="mt-3 flex space-x-2">
+            <button (click)="acceptNotification(notif.transactionId || 0)" 
+                    class="px-3 py-1 bg-green-500 text-white rounded-full text-sm hover:bg-green-600">
+              <i class="fas fa-check mr-1"></i> <span *ngIf="!loadingValidation">Valider</span>
+              <div *ngIf="loadingValidation" class="animate-spin inline-block mr-2 size-4 border-3 border-white border-t-transparent text-white rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+            </div>
+            </button>
+            <button (click)="rejectNotification(notif.transactionId || 0)" 
+                    class="px-3 py-1 bg-red-500 text-white rounded-full text-sm hover:bg-red-600">
+              <i class="fas fa-times mr-1"></i> Annuler
+            </button>
+          </div>
+        </div>
+        
+        <!-- Indicateur non lu -->
+        <div *ngIf="!notif.read" class="ml-2 w-2 h-2 bg-blue-500 rounded-full"></div>
+      </div>
+    </div>
+    
+    <!-- Aucune notification -->
+    <div *ngIf="notification.length === 0" class="p-8 text-center text-gray-500">
+      <i class="fas fa-bell-slash text-3xl mb-2"></i>
+      <p>Aucune notification pour le moment</p>
+    </div>
+  </div>
+</div>

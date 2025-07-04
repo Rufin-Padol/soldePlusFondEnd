@@ -1,0 +1,221 @@
+<header class="bg-gradient-to-b from-indigo-500 to-transparent dark:bg-gray-600">
+    <nav class="border-t-4 border-blue-500">
+        <div class="container flex items-center justify-between px-6 py-3 mx-auto">
+            <div class="flex  gap-2">
+
+                 <button (click)="chnageasibeBarleft()" class="flex  bg-white text-xs sm:text-sm  p-4 rounded-full items-center">
+               <span *ngIf="!menuSee"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+</svg>
+</span>
+<span *ngIf="menuSee" class=""><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</span>
+            </button>
+                <a href="#" class="flex  bg-white text-xs sm:text-sm  p-4 rounded-full items-center">
+               <span> </span> <span>CMR</span>
+            </a>
+            </div>
+
+            <a *ngIf="iscles" routerLink="/Marchants"   class="flex   bg-white text-xs sm:text-sm  p-4 rounded-full items-center">
+             <span> <i class="fas fa-key mr-2 text-sm"></i></span>   <span>{{buykey}}</span>
+            </a>
+
+             <a *ngIf="!iscles" href="#" class="flex   bg-white text-xs sm:text-sm  p-4 rounded-full items-center">
+                <span>{{parinerUser}}</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container px-6 py-16     mx-auto">
+        <h3  class="flex justify-center text-xl sm:text-2xl text-white gap-2"> <span>Montant de solde</span><span *ngIf="voirSolde"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+
+</svg>
+</span> <span *ngIf="!voirSolde"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+</svg>
+</span></h3>
+
+<h1  class="flex justify-center font-bold  text-white py-4 text-4xl sm:text-6xl text-center gap-2">{{montant}}FCFA</h1>
+
+        
+    </div>
+    <div class="py-6">
+
+    </div>
+</header>
+<main class="container px-4 sm:px-6 mx-auto   ">
+    <div class=" relative   h-28  ">
+        <div class="absolute top-[-100px] left-0 w-full h-64 "> 
+        <div class="flex justify-center gap-4 mx-4">
+            <div class="  sm:w-full  max-w-sm px-2 sm:px-4 py-4 bg-white rounded-md shadow-md dark:bg-gray-800">
+   
+
+    <div class="flex flex-col items-center justify-between">
+ 
+      <a href="#" class=" my-1 flex  text-indigo-500 font-bold justify-center items-center w-12 h-12   rounded-full bg-indigo-100  "><svg  class="m-4 fill-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+</svg>
+</a> 
+        <p class="mt-2  text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 dark:text-gray-300">Transfer</p>
+    </div>
+
+    <div>
+        <div class="flex  text-center justify-center items-center mt-2 text-gray-700 dark:text-gray-200">
+            <p class=" text-gray-500 text-sm sm:text-xl  ">send or wirthdraw your money</p>
+             
+        </div>
+
+        
+    </div>
+            </div>
+
+             <div class="  sm:w-full  max-w-sm px-2 sm:px-4 py-4 bg-white rounded-md shadow-md dark:bg-gray-800">
+   
+
+    <div class="flex flex-col items-center justify-between">
+ 
+      <a href="#" class=" my-1 flex  text-green-500 font-bold justify-center items-center w-12 h-12   rounded-full bg-green-100  "><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>
+
+</a> 
+        <p class="mt-2  text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 dark:text-gray-300">Add Money</p>
+    </div>
+
+    <div>
+        <div class="flex  text-center justify-center items-center mt-2 text-gray-700 dark:text-gray-200">
+            <p class=" text-gray-500 text-sm text-center sm:text-xl  ">Recieve or found accound</p>
+             
+        </div>
+
+        
+    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class=" ">
+        <div class="flex justify-center gap-4 mx-4">
+            <div class="title w-full  justify-between flex">
+                <h2 class=" font-bold text-xl sm:text-2xl lg:text-3xl">Transactions</h2>
+            <button><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class=" size-6 text-gray-500 hover:text-indigo-500 sm:size-10 lg:size-12">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+</svg>
+</button>
+            </div>
+
+           </div> 
+
+         <div class="px-4 sm:px-8 my-2">
+
+  <div *ngFor="let e of [1,4,5,6,7,5,6]" class="transation  flex justify-between items-center  border-b pb-2 border-gray-200   ">
+            <div class="info flex items-center gap-2">
+                <div class="avatar">
+                    <span class=" rounded-full h-8 w-8 sm:w-12 sm:h-12 flex bg-red-100 justify-center items-center "><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-red-500">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+</svg>
+</span>
+                </div>
+                <div class="flex flex-col">
+                    <small class="text-gray-500 text-xs sm:text-sm">2 mins ago</small >
+                    <span class="  text-sm sm:text-xl" >Transferred fund</span>
+                </div>
+            </div>
+            <div class="somme">
+                <span class="text-red-500 font-medium sm:text-xl">{{sommeTransation}} FCFA</span>
+            </div>
+           </div>
+
+         </div>
+    </div>
+</main>
+
+
+
+<aside class="flex absolute  top-0 flex-col  {{asibeBarleftof}} h-screen transition-all ease-in-out duration-300   py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l border-gray-500 dark:bg-gray-900 dark:border-gray-700">
+       <button (click)="chnageasibeBarleft()" class="flex  w-full   justify-end bg-white text-xs sm:text-sm  p-4 rounded-full items-center">
+              <span    class=""><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
+</span>
+ 
+ 
+            </button>
+
+    <div class="relative mt-6">
+        
+    </div> 
+
+    <div class="flex flex-col justify-between flex-1 mt-6">
+        <nav>
+            <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200" href="#">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <span class="mx-4 font-medium">Dashboard</span>
+            </a>
+
+            <a class="flex items-center px-4 py-2  cursor-pointer mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" routerLink="/marchant" routerLinkActive="router-link-active" >
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <span class="mx-4 font-medium">marchant</span>
+            </a>
+
+            <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 5V7M15 11V13M15 17V19M5 5C3.89543 5 3 5.89543 3 7V10C4.10457 10 5 10.8954 5 12C5 13.1046 4.10457 14 3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14C19.8954 14 19 13.1046 19 12C19 10.8954 19.8954 10 21 10V7C21 5.89543 20.1046 5 19 5H5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <span class="mx-4 font-medium">Tickets</span>
+            </a>
+
+            <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.3246 4.31731C10.751 2.5609 13.249 2.5609 13.6754 4.31731C13.9508 5.45193 15.2507 5.99038 16.2478 5.38285C17.7913 4.44239 19.5576 6.2087 18.6172 7.75218C18.0096 8.74925 18.5481 10.0492 19.6827 10.3246C21.4391 10.751 21.4391 13.249 19.6827 13.6754C18.5481 13.9508 18.0096 15.2507 18.6172 16.2478C19.5576 17.7913 17.7913 19.5576 16.2478 18.6172C15.2507 18.0096 13.9508 18.5481 13.6754 19.6827C13.249 21.4391 10.751 21.4391 10.3246 19.6827C10.0492 18.5481 8.74926 18.0096 7.75219 18.6172C6.2087 19.5576 4.44239 17.7913 5.38285 16.2478C5.99038 15.2507 5.45193 13.9508 4.31731 13.6754C2.5609 13.249 2.5609 10.751 4.31731 10.3246C5.45193 10.0492 5.99037 8.74926 5.38285 7.75218C4.44239 6.2087 6.2087 4.44239 7.75219 5.38285C8.74926 5.99037 10.0492 5.45193 10.3246 4.31731Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <span class="mx-4 font-medium">Settings</span>
+            </a>
+
+            <hr class="my-6 border-gray-200 dark:border-gray-600" />
+
+            <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 5V7M15 11V13M15 17V19M5 5C3.89543 5 3 5.89543 3 7V10C4.10457 10 5 10.8954 5 12C5 13.1046 4.10457 14 3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14C19.8954 14 19 13.1046 19 12C19 10.8954 19.8954 10 21 10V7C21 5.89543 20.1046 5 19 5H5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <span class="mx-4 font-medium">Tickets</span>
+            </a>
+
+            <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.3246 4.31731C10.751 2.5609 13.249 2.5609 13.6754 4.31731C13.9508 5.45193 15.2507 5.99038 16.2478 5.38285C17.7913 4.44239 19.5576 6.2087 18.6172 7.75218C18.0096 8.74925 18.5481 10.0492 19.6827 10.3246C21.4391 10.751 21.4391 13.249 19.6827 13.6754C18.5481 13.9508 18.0096 15.2507 18.6172 16.2478C19.5576 17.7913 17.7913 19.5576 16.2478 18.6172C15.2507 18.0096 13.9508 18.5481 13.6754 19.6827C13.249 21.4391 10.751 21.4391 10.3246 19.6827C10.0492 18.5481 8.74926 18.0096 7.75219 18.6172C6.2087 19.5576 4.44239 17.7913 5.38285 16.2478C5.99038 15.2507 5.45193 13.9508 4.31731 13.6754C2.5609 13.249 2.5609 10.751 4.31731 10.3246C5.45193 10.0492 5.99037 8.74926 5.38285 7.75218C4.44239 6.2087 6.2087 4.44239 7.75219 5.38285C8.74926 5.99037 10.0492 5.45193 10.3246 4.31731Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <span class="mx-4 font-medium">Settings</span>
+            </a>
+        </nav>
+
+        <a href="#" class="flex items-center px-4 -mx-2">
+            <img class="object-cover mx-2 rounded-full h-9 w-9" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="avatar" />
+            <span class="mx-2 font-medium text-gray-800 dark:text-gray-200">John Doe</span>
+        </a>
+    </div>
+</aside>
+
+
+

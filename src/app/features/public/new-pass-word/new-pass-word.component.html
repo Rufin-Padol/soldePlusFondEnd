@@ -1,0 +1,128 @@
+<section
+  class="min-h-screen bg-white dark:bg-gray-900 bg-cover bg-center"
+  style="background-image: url('/istockphoto-1970265582-612x612.jpg');"
+>
+  <div class="container mx-auto px-4 py-8 flex flex-col justify-center min-h-screen">
+    <div class="w-full max-w-md mx-auto bg-white bg-opacity-20 dark:bg-gray-900 rounded-2xl p-6 shadow-lg backdrop-blur-sm">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+
+        <div class="flex justify-center mb-4">
+          <img src="/379788-PC6M3J-741 copie.webp" alt="Logo" class="h-20 sm:h-16" />
+        </div>
+
+        <nav class="flex border-b border-gray-300 dark:border-gray-700 mb-6">
+          <a
+            href="#"
+            class="flex-1 py-2 text-center font-semibold text-gray-100 border-b-4 border-blue-500 dark:border-gray-400 dark:text-gray-300"
+            >S'enregistrer</a
+          >
+          <a
+            href="#"
+            class="flex-1 py-2 text-center font-semibold text-gray-400 dark:border-blue-400 dark:text-white"
+            >Se connecter</a
+          >
+        </nav>
+
+    
+
+<div>
+  <label class="sr-only" for="ancienMotDePasse">Mot de passe</label>
+  <div class="relative">
+    <input
+      id="ancienMotDePasse"
+      [type]="showancienMotDePasse ? 'text' : 'password'"
+      formControlName="ancienMotDePasse"
+      placeholder="Mot de passe recu"
+      class="w-full pl-12 pr-10 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-600">
+      <i class="fas fa-lock"></i> <!-- icône cadenas statique -->
+    </div>
+    <button
+      type="button"
+      (click)="togglePasswordVisibility('ancienMotDePasse')"
+      class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+      tabindex="-1"
+    >
+      <i [ngClass]="showancienMotDePasse ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+    </button>
+  </div>
+</div>
+
+   
+        <!-- Password -->
+        <!-- Password -->
+<div>
+  <label class="sr-only" for="password">Mot de passe</label>
+  <div class="relative">
+    <input
+      id="password"
+      [type]="showPassword ? 'text' : 'password'"
+      formControlName="password"
+      placeholder="Nouveau de passe"
+      class="w-full pl-12 pr-10 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-600">
+      <i class="fas fa-lock"></i> <!-- icône cadenas statique -->
+    </div>
+    <button
+      type="button"
+      (click)="togglePasswordVisibility('password')"
+      class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+      tabindex="-1"
+    >
+      <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Confirm Password -->
+<div>
+  <label class="sr-only" for="confirmPassword">Confirmer mot de passe</label>
+  <div class="relative">
+    <input
+      id="confirmPassword"
+      [type]="showConfirmPassword ? 'text' : 'password'"
+      formControlName="confirmPassword"
+      placeholder="Confirmer mot de passe"
+      class="w-full pl-12 pr-10 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-600">
+      <i class="fas fa-lock"></i> <!-- icône cadenas statique -->
+    </div>
+    <button
+      type="button"
+      (click)="togglePasswordVisibility('confirmPassword')"
+      class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+      tabindex="-1"
+    >
+      <i [ngClass]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+    </button>
+  </div>
+</div>
+
+<small *ngIf="successMessage !== null" class="block mt-1 text-center text-sm text-green-600">
+    {{ successMessage }}
+  </small>
+<small *ngIf="errorMessage !== null" class="block mt-1 text-center text-sm text-red-600">
+    {{ errorMessage }}
+  </small>
+
+        <button
+          type="submit"
+          class="w-full flex justify-center items-center gap-2 py-3 text-indigo-900 bg-yellow-300 rounded-lg font-semibold hover:bg-yellow-200 transition"
+          [disabled]="registerForm.invalid"
+        >
+        <div *ngIf="isloading" class="animate-spin inline-block size-4 border-3 border-current border-t-transparent text-indigo-900 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+  <span class="sr-only">Loading...</span>
+</div>  <span *ngIf="!isloading">S'inscrire</span>  <span *ngIf="isloading">Loading...</span>
+        </button>
+
+        <p class="text-center text-sm text-blue-600 cursor-pointer hover:underline" [routerLink]="['/login']">
+          Déjà un compte ? Connectez-vous
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+

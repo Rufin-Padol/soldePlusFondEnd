@@ -1,0 +1,85 @@
+<section
+  class="min-h-screen bg-white dark:bg-gray-900 bg-cover bg-center"
+  style="background-image: url('/istockphoto-1970265582-612x612.jpg');"
+>
+  <div class="container mx-auto px-4 py-8 flex flex-col justify-center min-h-screen">
+    <div class="w-full max-w-md mx-auto bg-white bg-opacity-20 dark:bg-gray-900 rounded-2xl p-6 shadow-lg backdrop-blur-sm">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+
+        <div class="flex justify-center mb-4">
+          <img src="/379788-PC6M3J-741 copie.webp" alt="Logo" class="h-20 sm:h-16" />
+        </div>
+
+        <nav class="flex border-b justify-center border-gray-300 dark:border-gray-700 mb-6">
+          <a
+            href="#"
+            class="flex-1 py-2 text-center font-semibold text-gray-600 border-b-4 border-blue-500 dark:border-gray-400 dark:text-gray-300"
+            >Validation</a
+          >
+          
+        </nav>
+
+       
+
+       
+
+
+ 
+
+<!-- Code Parrainage -->
+ <small class="text-center block">Entrez le code qui vous a été envoyé par email.</small>
+<div>
+  <label class="sr-only" for="code">Code de activation</label>
+  <div class="relative">
+    <input
+      id="code"
+      type="text"
+      formControlName="code"
+      placeholder="Code activation"
+      class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center justify-center w-12 pointer-events-none text-gray-400 dark:text-gray-600">
+      <!-- Icône clé -->
+      <i class="fas fa-key text-lg"></i>
+    </div>
+  </div>
+  <small *ngIf="code?.invalid && code?.dirty" class="block mt-1 text-sm text-red-600">
+    {{ getCodeError() }}
+  </small>
+</div>
+
+
+
+   
+  
+<small *ngIf="succesMessage !== null  " class="block mt-1 text-center text-sm text-green-600">
+    {{ succesMessage }}
+  </small>
+
+<small *ngIf="errorMessage !== null" class="block mt-1 text-center text-sm text-red-600">
+    {{ errorMessage }}
+  </small>
+
+        <button
+          type="submit"
+          class="w-full flex justify-center items-center gap-2 py-3 text-indigo-900 bg-yellow-300 rounded-lg font-semibold hover:bg-yellow-200 transition"
+          [disabled]="registerForm.invalid"
+        >
+        <div *ngIf="isloading" class="animate-spin inline-block size-4 border-3 border-current border-t-transparent text-indigo-900 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+  <span class="sr-only">Loading...</span>
+</div>  <span *ngIf="!isloading">Valider</span>  <span *ngIf="isloading">Loading...</span>
+        </button>
+
+        <p  (click)="regenereCode()" class="text-center text-sm text-blue-600 cursor-pointer hover:underline">
+        <span *ngIf="isSend" class="animate-spin inline-block size-4 border-3 border-current border-t-transparent text-indigo-900 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+  <span class="sr-only">Loading...</span>
+</span> 
+            <span *ngIf="!isSend">  Vous n'aviez pas recu de code? Renvoyer le code</span>
+        </p>
+
+         
+      </form>
+    </div>
+  </div>
+</section>
+

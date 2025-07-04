@@ -1,0 +1,118 @@
+.hero-section {
+  background-image: url("/istockphoto-1970265582-612x612.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  overflow: hidden;
+}
+
+
+
+/* Animation principale */
+.luxury-logo {
+    animation: 
+        subtle-float 4s ease-in-out infinite,
+        gold-pulse 3s ease-in-out infinite alternate;
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+}
+
+/* Effet de flottement subtil */
+@keyframes subtle-float {
+    0%, 100% { transform: translateY(0) rotate(0.5deg); }
+    50% { transform: translateY(-8px) rotate(-0.5deg); }
+}
+
+/* Pulsation dorée */
+@keyframes gold-pulse {
+    0% { opacity: 0.95; filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5)); }
+    100% { opacity: 1; filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)); }
+}
+
+/* Effet de particules dorées (optionnel) */
+.logo::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, transparent 70%),
+        repeating-linear-gradient(45deg, 
+            transparent 0px, 
+            transparent 10px, 
+            rgba(212, 175, 55, 0.1) 10px, 
+            rgba(212, 175, 55, 0.1) 11px);
+    opacity: 0.3;
+    animation: shine 6s linear infinite;
+    z-index: -1;
+}
+
+@keyframes shine {
+    0% { transform: rotate(0deg) translateX(-50%); }
+    100% { transform: rotate(360deg) translateX(-50%); }
+}
+
+
+
+.wrapper{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.link_wrapper{
+  position: relative;
+}
+
+a{
+  display: block;
+  width: 250px;
+  height: 50px;
+  line-height: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  background: #333;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 3px solid #333;
+  transition: all .35s;
+}
+
+.icon{
+  width: 50px;
+  height: 50px;
+  border: 3px solid transparent;
+  position: absolute;
+  transform: rotate(45deg);
+  right: 0;
+  top: 0;
+  z-index: -1;
+  transition: all .35s;
+}
+
+.icon svg{
+  width: 30px;
+  position: absolute;
+  top: calc(50% - 15px);
+  left: calc(50% - 15px);
+  transform: rotate(-45deg);
+  fill: #2ecc71;
+  transition: all .35s;
+}
+
+a:hover{
+  width: 200px;
+  border: 3px solid #2ecc71;
+  background: transparent;
+  color: #2ecc71;
+}
+
+a:hover + .icon{
+  border: 3px solid #2ecc71;
+  right: -25%;
+}

@@ -1,0 +1,195 @@
+<section
+  class="min-h-screen bg-white dark:bg-gray-900 bg-cover bg-center"
+  style="background-image: url('/istockphoto-1970265582-612x612.jpg');"
+>
+  <div class="container mx-auto px-4 py-8 flex flex-col justify-center min-h-screen">
+    <div class="w-full max-w-md mx-auto bg-white bg-opacity-20 dark:bg-gray-900 rounded-2xl p-6 shadow-lg backdrop-blur-sm">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+
+        <div class="flex justify-center mb-4">
+          <img src="/379788-PC6M3J-741 copie.webp" alt="Logo" class="h-20 sm:h-16" />
+        </div>
+
+        <nav class="flex border-b border-gray-300 dark:border-gray-700 mb-6">
+          <a
+            href="#"
+            class="flex-1 py-2 text-center font-semibold text-gray-100 border-b-4 border-blue-500 dark:border-gray-400 dark:text-gray-300"
+            >S'enregistrer</a
+          >
+          <a
+            href="#"
+            class="flex-1 py-2 text-center font-semibold text-gray-400 dark:border-blue-400 dark:text-white"
+            >Se connecter</a
+          >
+        </nav>
+
+        <!-- Username -->
+        <div>
+          <label class="sr-only" for="username">Nom d'utilisateur</label>
+          <div class="relative">
+            <input
+              id="username"
+              type="text"
+              formControlName="username"
+              placeholder="Nom d'utilisateur"
+              class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+          </div>
+          <small
+            *ngIf="username?.invalid && username?.dirty"
+            class="block mt-1 text-sm text-red-600"
+            >{{ getUsernameError() }}</small
+          >
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="sr-only" for="email">Email</label>
+          <div class="relative">
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="Adresse email"
+              class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+          </div>
+          <small *ngIf="email?.invalid && email?.dirty" class="block mt-1 text-sm text-red-600">
+    {{ getEmailError() }}
+  </small>
+        </div>
+
+
+<!-- Téléphone -->
+<div>
+  <label class="sr-only" for="telephone">Téléphone</label>
+  <div class="relative">
+    <input
+      id="telephone"
+      type="text"
+      formControlName="telephone"
+      placeholder="Numéro de téléphone"
+      class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center justify-center w-12 pointer-events-none text-gray-400 dark:text-gray-600">
+      <!-- Icône téléphone -->
+      <i class="fas fa-phone text-lg"></i>
+    </div>
+  </div>
+  <small *ngIf="telephone?.invalid && telephone?.dirty" class="block mt-1 text-sm text-red-600">
+    {{ getTelephoneError() }}
+  </small>
+</div>
+ 
+<!-- Code Parrainage -->
+<div *ngIf="!hidderChampCodeParrain">
+  <label class="sr-only" for="code">Code de parrainage</label>
+  <div class="relative">
+    <input
+      id="code"
+      type="text"
+      formControlName="code"
+      placeholder="Code parrainage"
+      class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center justify-center w-12 pointer-events-none text-gray-400 dark:text-gray-600">
+      <!-- Icône clé -->
+      <i class="fas fa-key text-lg"></i>
+    </div>
+  </div>
+  <small *ngIf="code?.invalid && code?.dirty" class="block mt-1 text-sm text-red-600">
+    {{ getCodeError() }}
+  </small>
+</div>
+
+
+
+   
+        <!-- Password -->
+        <!-- Password -->
+<div>
+  <label class="sr-only" for="password">Mot de passe</label>
+  <div class="relative">
+    <input
+      id="password"
+      [type]="showPassword ? 'text' : 'password'"
+      formControlName="password"
+      placeholder="Mot de passe"
+      class="w-full pl-12 pr-10 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-600">
+      <i class="fas fa-lock"></i> <!-- icône cadenas statique -->
+    </div>
+    <button
+      type="button"
+      (click)="togglePasswordVisibility('password')"
+      class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+      tabindex="-1"
+    >
+      <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Confirm Password -->
+<div>
+  <label class="sr-only" for="confirmPassword">Confirmer mot de passe</label>
+  <div class="relative">
+    <input
+      id="confirmPassword"
+      [type]="showConfirmPassword ? 'text' : 'password'"
+      formControlName="confirmPassword"
+      placeholder="Confirmer mot de passe"
+      class="w-full pl-12 pr-10 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-600">
+      <i class="fas fa-lock"></i> <!-- icône cadenas statique -->
+    </div>
+    <button
+      type="button"
+      (click)="togglePasswordVisibility('confirmPassword')"
+      class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+      tabindex="-1"
+    >
+      <i [ngClass]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+    </button>
+  </div>
+</div>
+
+
+<small *ngIf="errorMessage !== null" class="block mt-1 text-center text-sm text-red-600">
+    {{ errorMessage }}
+  </small>
+
+        <button
+          type="submit"
+          class="w-full flex justify-center items-center gap-2 py-3 text-indigo-900 bg-yellow-300 rounded-lg font-semibold hover:bg-yellow-200 transition"
+          [disabled]="registerForm.invalid"
+        >
+        <div *ngIf="isloading" class="animate-spin inline-block size-4 border-3 border-current border-t-transparent text-indigo-900 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+  <span class="sr-only">Loading...</span>
+</div>  <span *ngIf="!isloading">S'inscrire</span>  <span *ngIf="isloading">Loading...</span>
+        </button>
+
+        <p class="text-center text-sm text-blue-600 cursor-pointer hover:underline" [routerLink]="['/login']">
+          Déjà un compte ? Connectez-vous
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+

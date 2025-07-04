@@ -1,0 +1,441 @@
+
+
+
+<div class="px-4 py-6 max-w-3xl mx-auto">
+    <a routerLink="/clients" routerLinkActive="router-link-active"  class="   flex cursor-pointer justify-between items-center ">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-left-icon     shadow lucide-move-left"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>
+    </a>
+  <!-- Titre -->
+  <h2 class="text-2xl mt-2 font-bold text-gray-800 mb-6 flex items-center">
+    <i class="fas fa-store mr-3 text-blue-600"></i>
+    Marchands Disponibles
+  </h2>
+
+   <!-- Message de succès temporaire -->
+<!-- Message d'erreur temporaire -->
+ 
+
+<small *ngIf="showErrorMessage" class="block mb- text-center text-red-500">{{ messageErreur }}</small>
+
+
+  <!-- Liste des marchands -->
+  <div class="space-y-5">
+    <!-- Marchand - Répété pour chaque item  
+    <!-- <div *ngFor="let marchant of utilisateurs $index" class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden">
+      <div class="p-5">
+        <!-- En-tête  
+        <div class="flex items-start justify-between">
+          <!-- Photo + Nom + Avis  
+          <div class="flex items-center space-x-4">
+            <div class="relative">
+              <img src="https://randomuser.me/api/portraits/men/{{marchant}}.jpg" 
+                   class="w-14 h-14 rounded-full object-cover border-2 border-blue-500">
+              <span class="absolute bottom-0 right-0  text-white ">
+                <i class="fas fa-check p-1 bg-green-500 rounded-full text-[8px]"></i>
+              </span>
+            </div>
+            
+            <div>
+              <h3 class="font-bold text-lg">Marchand #{{marchant}}</h3>
+              <div class="flex items-center mt-1 space-x-3">
+                <div  (click)="incremanetlikegood()" class="flex items-center cursor-pointer text-green-600">
+                  <i class="fas fa-thumbs-up mr-1"></i>
+                  <span class="text-sm">{{likegoodinc}}</span>
+                </div>
+                <div (click)="incremanetlikebad()" class="flex items-center cursor-pointer text-red-600">
+                  <i class="fas fa-thumbs-down mr-1"></i>
+                  <span class="text-sm">{{likebadinc}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code marchand  
+          <div class="bg-gray-100 px-3 py-1 rounded-lg">
+            <span class="font-mono text-sm text-gray-600">{{marchant.solde}}</span>
+          </div>
+        </div>
+
+        <!-- Moyens de contact  
+        <div class="mt-4 pl-2">
+          <div class="mb-3">
+            <a href="https://wa.me/{{numeroMarchant}}" class="inline-flex items-center text-green-600 hover:text-green-800">
+              <i class="fab fa-whatsapp mr-2 text-lg"></i>
+              <span>+{{marchant.telephone}}</span>
+            </a>
+          </div>
+
+         
+
+
+          <div class="flex flex-wrap gap-3">
+            <span class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full">
+              <i class="fas fa-money-bill-wave mr-2"></i>
+              Orange Money
+            </span>
+            <span class="inline-flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+              <i class="fas fa-money-bill-wave mr-2"></i>
+              MTN Money
+            </span>
+            <span class="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-800 rounded-full">
+              <i class="fas fa-money-bill-wave mr-2"></i>
+              Wave
+            </span>
+          </div>
+        </div>
+
+        <!-- Bouton d'action  
+        <button  (click)="navigateMarcahntList(marchant.id)"    class="mt-5 w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white py-3 rounded-lg font-medium transition-all shadow-md hover:shadow-lg">
+          <i *ngIf="!loadingMarchants[.id]" class="fas fa-key mr-2"></i>
+           <div *ngIf="loadingMarchants[marchant]" class="animate-spin inline-block mr-2 size-4 border-3 border-white border-t-transparent text-white rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+            </div>
+          Acheter une clé
+        </button>
+      </div>
+    </div> -->
+<div *ngIf="typeStrnasation != 'recharge'">
+  <div *ngFor="let marchand of utilisateurs; let i = index" 
+     class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden">
+
+  <div class="p-5">
+    <!-- En-tête -->
+    <div class="flex items-start justify-between">
+      <!-- Photo + Nom + Avis -->
+      <div class="flex     space-x-4">
+        <div class="relative ">
+           
+          <img [src]="marchand.photoProfil || 'https://api.dicebear.com/7.x/identicon/svg?seed='+marchand.id" 
+               class="w-14  rounded-full object-cover border-2 border-blue-500">
+          <span *ngIf="marchand.status === 'ACTIF'" class="absolute top-0 right-0 text-white">
+            <i class="fas fa-check p-1 bg-green-500 rounded-full text-[8px]"></i>
+          </span>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-lg">{{marchand.nom}} - Marchand #{{marchand.id}}</h3>
+         <small class="text-[10px] text-gray-500">Contacte-moi d’abord sur WhatsApp pour avoir mon accord.</small>
+          <div class="flex items-center mt-1 space-x-3">
+            <div (click)="incremanetlikegood()" class="flex items-center cursor-pointer" 
+                 [ngClass]="{'text-green-600': likegood, 'text-gray-400': !likegood}">
+              <i class="fas fa-thumbs-up mr-1"></i>
+              <span class="text-sm">{{marchand.avis?.likePositif || 0 + (likegood ? likegoodinc : 0)}}</span>
+            </div>
+            <div (click)="incremanetlikebad()" class="flex items-center cursor-pointer"
+                 [ngClass]="{'text-red-600': likebad, 'text-gray-400': !likebad}">
+              <i class="fas fa-thumbs-down mr-1"></i>
+              <span class="text-sm">{{marchand.avis?.likeNegatif || 0 + (likebad ? likebadinc : 0)}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solde marchand -->
+      <div class="bg-gray-100 px-3 py-1 rounded-lg">
+        <span class="font-mono text-sm text-gray-600">{{marchand.solde}} XAF</span>
+      </div>
+    </div>
+
+    <!-- Moyens de contact -->
+    <div class="mt-4 pl-2">
+      <div class="mb-3">
+        <a [href]="'https://wa.me/' + marchand.telephone" 
+           class="inline-flex items-center text-green-600 hover:text-green-800" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp mr-2 text-lg"></i>
+          <span>+{{marchand.telephone}}</span>
+        </a>
+      </div>
+
+      <!-- Moyens de paiement (décoratifs seulement comme demandé) -->
+      <div class="flex flex-wrap gap-3">
+        <span class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full">
+          <i class="fas fa-money-bill-wave mr-2"></i>
+          Orange Money
+        </span>
+        <span class="inline-flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+          <i class="fas fa-money-bill-wave mr-2"></i>
+          MTN Money
+        </span>
+        <span class="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-800 rounded-full">
+          <i class="fas fa-money-bill-wave mr-2"></i>
+          Wave
+        </span>
+      </div>
+    </div>
+
+   
+
+  
+        <button *ngIf="typeStrnasation == 'activation' " (click)="navigateMarcahntList(marchand.id,marchand.solde)"    class="mt-5 w-full flex justify-center items-center bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white py-3 rounded-lg font-medium transition-all shadow-md hover:shadow-lg">
+          <i *ngIf="!loadingMarchants[marchand?.id || 0]" class="fas fa-key mr-2"></i>
+           <div *ngIf="loadingMarchants[marchand?.id || 0]" class="animate-spin inline-block mr-2 size-4 border-3 border-white border-t-transparent text-white rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+            </div>
+          <span  >Acheter une clé</span>    
+        </button>
+
+         <button *ngIf="typeStrnasation == 'retrait' " (click)="Montannt(marchand.id,marchand.solde)"    class="mt-5 w-full flex justify-center items-center bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white py-3 rounded-lg font-medium transition-all shadow-md hover:shadow-lg">
+             <i  *ngIf="!loadingMarchants[marchand?.id || 0]" class="fas fa-money-bill-wave mr-2"></i>
+           <div *ngIf="loadingMarchants[marchand?.id || 0]" class="animate-spin inline-block mr-2 size-4 border-3 border-white border-t-transparent text-white rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+            </div>
+           <span >Retrait</span>
+        </button>
+
+        
+ 
+  </div>
+</div>
+</div>
+  
+
+
+<div *ngIf="typeStrnasation == 'recharge'"  >
+  <div *ngFor="let marchand of utilisateursAdmin; let i = index" 
+     class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100 overflow-hidden">
+
+  <div class="p-5">
+    <!-- En-tête -->
+    <div class="flex items-start justify-between">
+      <!-- Photo + Nom + Avis -->
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <img [src]="'https://randomuser.me/api/portraits/men/' + (i + 1) + '.jpg'" 
+               class="w-14 h-14 rounded-full object-cover border-2 border-blue-500">
+          <span *ngIf="marchand.status === 'ACTIF'" class="absolute bottom-0 right-0 text-white">
+            <i class="fas fa-check p-1 bg-green-500 rounded-full text-[8px]"></i>
+          </span>
+        </div>
+        
+        <!-- <div>
+          <h3 class="font-bold text-lg">{{marchand.nom}} - Marchand #{{marchand.id}}</h3>
+         <small class="text-[10px] text-gray-500">Contacte-moi d’abord sur WhatsApp pour avoir mon accord.</small>
+          <div class="flex items-center mt-1 space-x-3">
+            <div (click)="incremanetlikegood()" class="flex items-center cursor-pointer" 
+                 [ngClass]="{'text-green-600': likegood, 'text-gray-400': !likegood}">
+              <i class="fas fa-thumbs-up mr-1"></i>
+              <span class="text-sm">{{marchand.avis?.likePositif || 0 + (likegood ? likegoodinc : 0)}}</span>
+            </div>
+            <div (click)="incremanetlikebad()" class="flex items-center cursor-pointer"
+                 [ngClass]="{'text-red-600': likebad, 'text-gray-400': !likebad}">
+              <i class="fas fa-thumbs-down mr-1"></i>
+              <span class="text-sm">{{marchand.avis?.likeNegatif || 0 + (likebad ? likebadinc : 0)}}</span>
+            </div>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- Solde marchand -->
+      <div class="bg-gray-100 px-3 py-1 rounded-lg">
+        <span class="font-mono text-sm text-gray-600">{{marchand.solde}} XAF</span>
+      </div>
+    </div>
+
+    <!-- Moyens de contact -->
+    <div class="mt-4 pl-2">
+      <div class="mb-3">
+        <a [href]="'https://wa.me/' + marchand.telephone" 
+           class="inline-flex items-center text-green-600 hover:text-green-800" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp mr-2 text-lg"></i>
+          <span>+{{marchand.telephone}}</span>
+        </a>
+      </div>
+
+      <!-- Moyens de paiement (décoratifs seulement comme demandé) -->
+      <div class="flex flex-wrap gap-3">
+        <span class="inline-flex items-center px-3 py-1 bg-orange-100 text-orange-800 rounded-full">
+          <i class="fas fa-money-bill-wave mr-2"></i>
+          Orange Money
+        </span>
+        <span class="inline-flex items-center px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+          <i class="fas fa-money-bill-wave mr-2"></i>
+          MTN Money
+        </span>
+        <span class="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-800 rounded-full">
+          <i class="fas fa-money-bill-wave mr-2"></i>
+          Wave
+        </span>
+      </div>
+    </div>
+
+   
+
+  
+       
+
+         
+
+         <button   (click)="Montannt(marchand.id,marchand.solde)"    class="mt-5 w-full flex justify-center items-center bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white py-3 rounded-lg font-medium transition-all shadow-md hover:shadow-lg">
+             <i  *ngIf="!loadingMarchants[marchand?.id || 0]" class="fas fa-money-bill-wave mr-2"></i>
+           <div *ngIf="loadingMarchants[marchand?.id || 0]" class="animate-spin inline-block mr-2 size-4 border-3 border-white border-t-transparent text-white rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+            </div>
+           <span >Recharge</span>
+        </button>
+ 
+  </div>
+</div>
+</div>
+  </div>
+
+  <!-- Bouton "Voir plus" -->
+  <div class="mt-6 text-center">
+    <button class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+      <span>Voir plus de marchands</span>
+      <i class="fas fa-chevron-down ml-2"></i>
+    </button>
+  </div>
+</div>
+
+
+<!-- <ng-template #dialogMontant>
+  <h2 mat-dialog-title>Retrait</h2>
+  <mat-dialog-content>
+   <mat-form-field appearance="outline" class="w-full">
+  <mat-label>Montant</mat-label>
+  <input matInput type="number" [(ngModel)]="montant" required min="1" [max]="utilisateu?.solde || 0" />
+  <mat-error *ngIf="montant <= 0">Le montant doit être positif</mat-error>
+  <mat-error *ngIf="montant > (utilisateu?.solde || 0)">Solde insuffisant</mat-error>
+</mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="dialogRef.close()">Annuler</button>
+    <button mat-raised-button color="primary" (click)="validerMontant()">Valider</button>
+  </mat-dialog-actions>
+</ng-template> -->
+ 
+
+<!-- <ng-template #dialogMontant>
+  <div class="p-6">
+    <!-- Titre avec icône -->
+    
+
+    <!-- Contenu 
+    <mat-dialog-content class="!pb-4 !overflow-visible">
+      <div class="space-y-4">
+        <!-- Champ Montant  
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Montant (XAF)</mat-label>
+          <input matInput type="number" [(ngModel)]="montant" required min="1" [max]="utilisateu?.solde || 0" />
+          <mat-icon matPrefix class="text-gray-400">Entrez le montant</mat-icon>
+          <mat-hint *ngIf="utilisateu?.solde" class="text-sm">
+            Solde disponible: {{ utilisateu.solde | currency:'XAF':'symbol':'1.0-0' }}
+          </mat-hint>
+          <mat-error *ngIf="montant <= 0">Le montant doit être supérieur à 0</mat-error>
+          <mat-error *ngIf="montant > (utilisateu?.solde || 0)">
+            Vous ne pouvez pas retirer plus que votre solde
+          </mat-error>
+        </mat-form-field>
+
+      
+      </div>
+    </mat-dialog-content>
+
+    <!-- Actions  
+    <mat-dialog-actions class="!justify-between !px-0 !pb-0">
+      <button mat-stroked-button (click)="dialogRef.close()" class="!border-gray-300 !text-gray-600">
+        <i class="fas fa-times mr-2"></i> Annuler
+      </button>
+      <button mat-raised-button 
+              color="primary" 
+              (click)="validerMontant()"
+              [disabled]="!montant || montant <= 0 || montant > (utilisateu?.solde || 0)"
+              class="!bg-blue-600 !text-white">
+        <i class="fas fa-check-circle mr-2"></i> Confirmer
+      </button>
+    </mat-dialog-actions>
+  </div>
+</ng-template> -->
+
+
+<ng-template *ngIf="typeStrnasation == 'retrait'" #dialogMontant>
+  <div class="p-6">
+    <!-- Titre simple -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">Effectuer un retrait</h2>
+
+    <!-- Champ input seul et simple -->
+    <mat-dialog-content class="!p-0">
+      <mat-form-field appearance="outline" class="w-full">
+        <small>Min: 2000 XAF</small>
+        <input matInput 
+               type="number" 
+               [(ngModel)]="montant" 
+               placeholder="Entrez le montant"
+               required 
+               min="1999" 
+               [max]="utilisateu?.solde || 0"
+               class="!p-3">
+            
+          <mat-hint *ngIf="utilisateu?.solde" class="text-sm">
+            Solde disponible: {{ utilisateu.solde | currency:'XAF':'symbol':'1.0-0' }}
+          </mat-hint>
+            
+          <mat-error *ngIf="montant <= 1999">Le montant doit être supérieur ou egale à 2000</mat-error>
+          <mat-error *ngIf="montant > (utilisateu?.solde || 1000000)">
+            Vous ne pouvez pas retirer plus que votre solde
+          </mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <!-- Actions -->
+    <mat-dialog-actions align="end" class="!px-0 !pb-0">
+      <button mat-button (click)="dialogRef.close()">Annuler</button>
+      <button mat-raised-button 
+              color="primary" 
+              (click)="validerMontant(this.soldeMarchand)"
+              [disabled]="!montant || montant <= 1999 || montant > (utilisateu?.solde || 1000000)">
+        <span  *ngIf="!retraitLoading" >Valider</span>
+
+         <div *ngIf="retraitLoading"  class="animate-spin inline-block mr-2 size-4 border-3 border-white border-t-transparent text-white rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+            </div>
+      </button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>
+
+<ng-template *ngIf="typeStrnasation == 'recharge'" #dialogMontant>
+  <div class="p-6">
+    <!-- Titre simple -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">Effectuer une recharge</h2>
+
+    <!-- Champ input seul et simple -->
+    <mat-dialog-content class="!p-0">
+      <mat-form-field appearance="outline" class="w-full">
+        <small>Min: 5000 XAF</small>
+        <input matInput 
+               type="number" 
+               [(ngModel)]="montant" 
+               placeholder="Entrez le montant"
+               required 
+               min="4999" 
+               
+               class="!p-3">
+            
+          <mat-hint *ngIf="utilisateu?.solde" class="text-sm">
+            Monatnt minimale de recharge est de 5000XAF
+          </mat-hint>
+            
+          <mat-error *ngIf="montant <= 4999">Le montant doit être supérieur ou egale à 5000</mat-error>
+          <mat-error *ngIf="montant >    1000000 ">
+            Vous ne pouvez pas rechager plus  que 1.000.000 XAF
+          </mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <!-- Actions -->
+    <mat-dialog-actions align="end" class="!px-0 !pb-0">
+      <button mat-button (click)="dialogRef.close()">Annuler</button>
+      <button mat-raised-button 
+              color="primary" 
+              (click)="validerMontant(this.soldeMarchand)"
+              [disabled]="!montant || montant <= 4999 || montant > 1000000">
+        <span  *ngIf="!retraitLoading" >Valider</span>
+
+         <div *ngIf="retraitLoading"  class="animate-spin inline-block mr-2 size-4 border-3 border-white border-t-transparent text-white rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+            </div>
+      </button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>

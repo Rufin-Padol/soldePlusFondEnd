@@ -1,0 +1,14 @@
+.animate-fade-out {
+  animation: fadeOut 2s forwards;
+  animation-delay: 2s;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+}
