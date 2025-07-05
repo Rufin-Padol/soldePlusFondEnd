@@ -3,7 +3,7 @@ name: Deploy Angular App to VPS
 on:
   push:
     branches:
-      - main
+      - main  # adapte si besoin
 
 jobs:
   build-and-deploy:
@@ -38,28 +38,20 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
-      - name: Clean and Deploy
+      - name: Deploy to VPS
         run: |
-          # Nettoyage du dossier distant et vérification
-          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} \
-            "rm -rf /var/www/angular-app/* && ls -la /var/www/angular-app/"
-          
-          # Transfert des fichiers avec feedback visuel
-          rsync -avz --progress --no-perms --no-owner --no-group --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            ./dist/ \
-            root@${{ secrets.VPS_IP }}:/var/www/angular-app/
-
-          # Vérification finale
-          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} \
-            "ls -la /var/www/angular-app/ && du -sh /var/www/angular-app/*"
-
-      - name: Restart Nginx
-        run: |
-          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} \
-            "sudo systemctl restart nginx && systemctl status nginx --no-pager"
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} "
+            mkdir -p /var/www/angular-app && \
+            rm -rf /var/www/angular-app/* && \
+            chown -R www-data:www-data /var/www/angular-app
+          "
+          rsync -avz --no-perms --no-owner --no-group --delete \
+            -e 'ssh -o StrictHostKeyChecking=no' \
+            ./dist/ root@${{ secrets.VPS_IP }}:/var/www/angular-app/
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} "
+            sudo systemctl reload nginx
+          "
 
       - name: Verify deployment
         run: |
-          curl -sSf http://${{ secrets.VPS_IP }} > /dev/null || \
-            (echo "Deployment verification failed!" && exit 1)
+          curl -sSf http://${{ secrets.VPS_IP }} || (echo "Deployment failed" && exit 1)
