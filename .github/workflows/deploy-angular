@@ -3,12 +3,12 @@ name: Deploy Angular App to VPS
 on:
   push:
     branches:
-      - main  # Changez si vous utilisez une autre branche
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15  # Évite les jobs bloqués indéfiniment
+    timeout-minutes: 15
 
     steps:
       - name: Checkout code
@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # Version LTS recommandée
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -26,7 +26,7 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --configuration=production
         env:
-          NODE_OPTIONS: '--max_old_space_size=4096'  # Augmente la mémoire si nécessaire
+          NODE_OPTIONS: '--max_old_space_size=4096'
 
       - name: Verify build artifacts
         run: |
@@ -36,27 +36,29 @@ jobs:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}  # Clé SSH sans mot de passe
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
-      - name: Deploy to VPS
+      - name: Clean and Deploy
         run: |
-          # Crée la structure de dossier si nécessaire
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-            root@${{ secrets.VPS_IP }} \
-            "mkdir -p /var/www/angular-app && chown -R www-data:www-data /var/www/angular-app"
+          # Nettoyage du dossier distant et vérification
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} \
+            "rm -rf /var/www/angular-app/* && ls -la /var/www/angular-app/"
           
-          # Synchronisation avec vérification
-          rsync -avz --no-perms --no-owner --no-group --delete \
-            -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+          # Transfert des fichiers avec feedback visuel
+          rsync -avz --progress --no-perms --no-owner --no-group --delete \
+            -e "ssh -o StrictHostKeyChecking=no" \
             ./dist/ \
             root@${{ secrets.VPS_IP }}:/var/www/angular-app/
 
+          # Vérification finale
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} \
+            "ls -la /var/www/angular-app/ && du -sh /var/www/angular-app/*"
+
       - name: Restart Nginx
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-            root@${{ secrets.VPS_IP }} \
-            "sudo systemctl reload nginx && echo 'Nginx reloaded successfully'"
-        
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} \
+            "sudo systemctl restart nginx && systemctl status nginx --no-pager"
+
       - name: Verify deployment
         run: |
           curl -sSf http://${{ secrets.VPS_IP }} > /dev/null || \
